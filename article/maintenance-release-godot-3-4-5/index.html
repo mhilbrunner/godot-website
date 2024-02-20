@@ -21,7 +21,7 @@
 	<link rel="alternate" type="application/rss+xml" title="Godot News" href="/rss.xml">
 	<link rel="icon" href="/assets/favicon.png" sizes="any">
 	<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-	<link rel="stylesheet" href="/assets/css/main.css?109">
+	<link rel="stylesheet" href="/assets/css/main.css?111">
 	<link rel="stylesheet" href="/assets/css/tobii.min.css">
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-Bold.woff2" crossorigin>
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-ExtraBold.woff2" crossorigin>
@@ -45,9 +45,7 @@
 		<nav id="nav">
 			<ul class="left">
 				<li><a href="/features">Features</a></li>
-				<div class="only-on-mobile" style="width: 100%">
-					<li><a href="/showcase">Showcase</a></li>
-				</div>
+				<li class="only-on-mobile"><a href="/showcase">Showcase</a></li>
 				<li><a href="/blog">Blog</a></li>
 				<li><a href="/community">Community</a></li>
 				<li><a href="/contact">About</a></li>
@@ -179,6 +177,19 @@
 		color: var(--base-color-text-subtitle-date);
 	}
 
+	.article-metadata .date.post-recent-highlight {
+		color: var(--post-recent-highlight-color);
+		opacity: 0.8;
+	}
+
+	.article-metadata .date.post-recent-highlight::after {
+		font-size: 80%;
+		content: "NEW";
+		border: 2px solid var(--post-recent-highlight-color);
+		padding: 2px 3px;
+		margin-left: 8px;
+	}
+
 	.tag.active {
 		filter: saturate(0.75);
 	}
@@ -214,7 +225,7 @@
 		<div class="content article-container">
 			<figure class="article-cover">
 				
-				<figcaption style="opacity: 0.8; line-height: 1.5">
+				<figcaption>
 					<strong>BLASTRONAUT</strong>
 					<span style="margin-left: 0.75rem; font-size: 90%">A game by Perfoon</span>
 				</figcaption>
@@ -222,7 +233,7 @@
 
 				<img src="/storage/app/uploads/public/62e/8ee/3bb/62e8ee3bbe08d090000998.jpg" title="BLASTRONAUT"
 					alt="BLASTRONAUT A game by Perfoon" class="rounded-lg"
-					style="width: 100%; height: auto" />
+					style="width: 100%; height: auto; background-color: transparent;" />
 			</figure>
 
 			<div class="article-info">
@@ -234,11 +245,11 @@
 						<span>By: </span>
 						
 						
-							<img class="avatar" width="25" height="25" src="/assets/images/authors/akien.jpg" alt="Rémi Verschelde" loading="lazy">
+							<img class="avatar" width="25" height="25" src="/assets/images/authors/akien.webp" alt="Rémi Verschelde" loading="lazy">
 						
 						<span class="by">Rémi Verschelde</span>
 					</div>
-					<span class="date">  2 August 2022</span>
+					<span class="date" data-post-date="2022-08-02 09:22:27 +0000">  2 August 2022</span>
 				</div>
 
 				<div class="tags">
@@ -361,7 +372,7 @@
 </div>
 
 <link rel="stylesheet" href="/assets/css/anchor-link.css?1">
-<link rel="stylesheet" href="/assets/css/article-cards.css?1">
+<link rel="stylesheet" href="/assets/css/article-cards.css?2">
 <script src="/assets/js/anchor-link.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
@@ -390,7 +401,7 @@
 	<div class="container flex footer-container">
 		<div id="copyright">
 			<p>
-				© 2007-2023 Juan Linietsky, Ariel Manzur and <a
+				© 2007-2024 Juan Linietsky, Ariel Manzur and <a
 					href="https://github.com/godotengine/godot/blob/master/AUTHORS.md" target="_blank"
 					rel="noopener">contributors</a>.<br>
 				Hosted by the <a href="https://godot.foundation/" target="_blank" rel="noopener">Godot Foundation</a>.<br>
@@ -466,6 +477,13 @@
 		// in case a code block appears in an article.
 		document.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);
+		});
+
+		document.querySelectorAll('[data-post-date]').forEach((postDate) => {
+			// Highlight post dates that are less than 48 hours old.
+			if (Date.parse(postDate.dataset.postDate) > (Date.now() - 1000 * 60 * 60 * 48)) {
+				postDate.classList.add("post-recent-highlight");
+			};
 		});
 
 		// Initialize lightbox.

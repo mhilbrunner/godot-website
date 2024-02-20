@@ -24,6 +24,7 @@
   --accent-color: #f57389;
 
   --secondary-color-text: #546b99;
+  --post-recent-highlight-color: #ea580c;
 
   --link-color: hsl(206, 58%, 50%);
   --link-underline-color: hsla(206, 58%, 50%, 0.3);
@@ -59,15 +60,9 @@
   --codeblock-background-color: #282b2e;
   --codeblock-color: #e0e2e4;
 
-  --sponsor-background-color: #dcdcdc;
-  --sponsor-platinum-background-color: #cfdbe4;
-  --sponsor-patron-background-color: #cfdbe4;
-  --sponsor-gold-background-color: #e0dfd4;
-  --sponsor-silver-background-color: #e3e3e3;
-
   --download-hero-color: hsla(0, 0%, 100%, 0.9);
   --download-main-details-color: #f1f1f1;
-  --download-table-color: rgba(160, 160, 160, 0.05);
+  --download-table-color: rgba(22, 22, 22, 0.08);
   --platform-note-background-color: rgb(48 86 210 / 9%);
   --platform-code-background-color: #e5ebf1;
   --download-mono-background-color: rgb(43 58 76 / 82%);
@@ -117,6 +112,7 @@
     --accent-color: #5b5491;
 
     --secondary-color-text: #a6a6a6;
+    --post-recent-highlight-color: #fb923c;
 
     --link-color: hsl(200, 60%, 70%);
     --link-underline-color: hsla(200, 60%, 70%, 0.3);
@@ -149,11 +145,6 @@
     --code-background-color: #333639;
     --codeblock-background-color: #333639;
     --codeblock-color: hsla(0, 0%, 100%, 0.9);
-
-    --sponsor-background-color: #ffffff;
-    --sponsor-platinum-background-color: #e2ebfa;
-    --sponsor-patron-background-color: #e2ebfa;
-    --sponsor-gold-background-color: #efece2;
 
     --download-hero-color: hsla(0, 0%, 100%, 0.9);
     --download-main-details-color: #f1f1f1;
@@ -1336,6 +1327,23 @@ article.article-card p.excerpt {
   font-size: 16px;
   opacity: 0.8;
   margin-top: 0;
+  margin-bottom: 6px;
+}
+article.article-card span.date {
+  color: var(--base-color-text);
+  font-size: 15px;
+  opacity: 0.65;
+}
+article.article-card span.date.post-recent-highlight {
+  color: var(--post-recent-highlight-color);
+  opacity: 1.0;
+}
+article.article-card span.date.post-recent-highlight::after {
+  font-size: 80%;
+  content: "NEW";
+  border: 1px solid var(--post-recent-highlight-color);
+  padding: 2px 3px;
+  margin-left: 8px;
 }
 article.article-card h3 {
   font-size: 22px;
@@ -1366,6 +1374,14 @@ article.article-card .info .avatar {
 article.article-card .info span {
   font-size: 14px;
   color: var(--secondary-color-text);
+}
+
+figure.article-cover figcaption {
+  opacity: 0.8;
+  line-height: 1.5
+}
+figure.article-cover figcaption a {
+  color: inherit;
 }
 
 section.sponsors .grid {
@@ -1399,22 +1415,7 @@ section.sponsors .grid {
   padding: 17px;
   border-radius: 7px;
   box-sizing: border-box;
-}
-
-.sponsor-card.patron {
-  background-color: var(--sponsor-patron-background-color);
-}
-
-.sponsor-card.platinum {
-  background-color: var(--sponsor-platinum-background-color);
-}
-
-.sponsor-card.gold {
-  background-color: var(--sponsor-gold-background-color);
-}
-
-.sponsor-card.silver {
-  background-color: var(--sponsor-silver-background-color);
+  background-color: white;
 }
 
 .sponsor-card img {

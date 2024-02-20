@@ -21,7 +21,7 @@
 	<link rel="alternate" type="application/rss+xml" title="Godot News" href="/rss.xml">
 	<link rel="icon" href="/assets/favicon.png" sizes="any">
 	<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-	<link rel="stylesheet" href="/assets/css/main.css?109">
+	<link rel="stylesheet" href="/assets/css/main.css?111">
 	<link rel="stylesheet" href="/assets/css/tobii.min.css">
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-Bold.woff2" crossorigin>
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-ExtraBold.woff2" crossorigin>
@@ -45,9 +45,7 @@
 		<nav id="nav">
 			<ul class="left">
 				<li><a href="/features">Features</a></li>
-				<div class="only-on-mobile" style="width: 100%">
-					<li><a href="/showcase">Showcase</a></li>
-				</div>
+				<li class="only-on-mobile"><a href="/showcase">Showcase</a></li>
 				<li><a href="/blog">Blog</a></li>
 				<li><a href="/community">Community</a></li>
 				<li><a href="/contact">About</a></li>
@@ -179,6 +177,19 @@
 		color: var(--base-color-text-subtitle-date);
 	}
 
+	.article-metadata .date.post-recent-highlight {
+		color: var(--post-recent-highlight-color);
+		opacity: 0.8;
+	}
+
+	.article-metadata .date.post-recent-highlight::after {
+		font-size: 80%;
+		content: "NEW";
+		border: 2px solid var(--post-recent-highlight-color);
+		padding: 2px 3px;
+		margin-left: 8px;
+	}
+
 	.tag.active {
 		filter: saturate(0.75);
 	}
@@ -217,7 +228,7 @@
 
 				<img src="/storage/app/uploads/public/5cb/9e2/b60/5cb9e2b60bf06285510736.png" title=""
 					alt=" " class="rounded-lg"
-					style="width: 100%; height: auto" />
+					style="width: 100%; height: auto; background-color: transparent;" />
 			</figure>
 
 			<div class="article-info">
@@ -229,11 +240,11 @@
 						<span>By: </span>
 						
 						
-							<img class="avatar" width="25" height="25" src="/assets/images/authors/faless.jpg" alt="Fabio Alessandrelli" loading="lazy">
+							<img class="avatar" width="25" height="25" src="/assets/images/authors/faless.webp" alt="Fabio Alessandrelli" loading="lazy">
 						
 						<span class="by">Fabio Alessandrelli</span>
 					</div>
-					<span class="date"> 19 April 2019</span>
+					<span class="date" data-post-date="2019-04-19 14:53:33 +0000"> 19 April 2019</span>
 				</div>
 
 				<div class="tags">
@@ -388,7 +399,7 @@ https://github.com/godotengine/godot/tree/master</p>
 </div>
 
 <link rel="stylesheet" href="/assets/css/anchor-link.css?1">
-<link rel="stylesheet" href="/assets/css/article-cards.css?1">
+<link rel="stylesheet" href="/assets/css/article-cards.css?2">
 <script src="/assets/js/anchor-link.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
@@ -417,7 +428,7 @@ https://github.com/godotengine/godot/tree/master</p>
 	<div class="container flex footer-container">
 		<div id="copyright">
 			<p>
-				© 2007-2023 Juan Linietsky, Ariel Manzur and <a
+				© 2007-2024 Juan Linietsky, Ariel Manzur and <a
 					href="https://github.com/godotengine/godot/blob/master/AUTHORS.md" target="_blank"
 					rel="noopener">contributors</a>.<br>
 				Hosted by the <a href="https://godot.foundation/" target="_blank" rel="noopener">Godot Foundation</a>.<br>
@@ -493,6 +504,13 @@ https://github.com/godotengine/godot/tree/master</p>
 		// in case a code block appears in an article.
 		document.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);
+		});
+
+		document.querySelectorAll('[data-post-date]').forEach((postDate) => {
+			// Highlight post dates that are less than 48 hours old.
+			if (Date.parse(postDate.dataset.postDate) > (Date.now() - 1000 * 60 * 60 * 48)) {
+				postDate.classList.add("post-recent-highlight");
+			};
 		});
 
 		// Initialize lightbox.

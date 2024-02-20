@@ -21,7 +21,7 @@
 	<link rel="alternate" type="application/rss+xml" title="Godot News" href="/rss.xml">
 	<link rel="icon" href="/assets/favicon.png" sizes="any">
 	<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-	<link rel="stylesheet" href="/assets/css/main.css?109">
+	<link rel="stylesheet" href="/assets/css/main.css?111">
 	<link rel="stylesheet" href="/assets/css/tobii.min.css">
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-Bold.woff2" crossorigin>
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-ExtraBold.woff2" crossorigin>
@@ -45,9 +45,7 @@
 		<nav id="nav">
 			<ul class="left">
 				<li><a href="/features">Features</a></li>
-				<div class="only-on-mobile" style="width: 100%">
-					<li><a href="/showcase">Showcase</a></li>
-				</div>
+				<li class="only-on-mobile"><a href="/showcase">Showcase</a></li>
 				<li><a href="/blog">Blog</a></li>
 				<li><a href="/community">Community</a></li>
 				<li><a href="/contact">About</a></li>
@@ -179,6 +177,19 @@
 		color: var(--base-color-text-subtitle-date);
 	}
 
+	.article-metadata .date.post-recent-highlight {
+		color: var(--post-recent-highlight-color);
+		opacity: 0.8;
+	}
+
+	.article-metadata .date.post-recent-highlight::after {
+		font-size: 80%;
+		content: "NEW";
+		border: 2px solid var(--post-recent-highlight-color);
+		padding: 2px 3px;
+		margin-left: 8px;
+	}
+
 	.tag.active {
 		filter: saturate(0.75);
 	}
@@ -214,7 +225,7 @@
 		<div class="content article-container">
 			<figure class="article-cover">
 				
-				<figcaption style="opacity: 0.8; line-height: 1.5">
+				<figcaption>
 					<strong>Lush Jungle</strong>
 					<span style="margin-left: 0.75rem; font-size: 90%">A demo scene by Wrobot</span>
 				</figcaption>
@@ -222,7 +233,7 @@
 
 				<img src="/storage/blog/covers/dev-snapshot-godot-4-2-beta-1.webp" title="Lush Jungle"
 					alt="Lush Jungle A demo scene by Wrobot" class="rounded-lg"
-					style="width: 100%; height: auto" />
+					style="width: 100%; height: auto; background-color: transparent;" />
 			</figure>
 
 			<div class="article-info">
@@ -238,7 +249,7 @@
 						
 						<span class="by">Yuri Sizov</span>
 					</div>
-					<span class="date"> 12 October 2023</span>
+					<span class="date" data-post-date="2023-10-12 14:00:00 +0000"> 12 October 2023</span>
 				</div>
 
 				<div class="tags">
@@ -352,7 +363,7 @@
 
 <p>Let’s start with <a href="https://github.com/groud">Gilles Roudière</a> who has laid a lot of ground work for future improvements with an internal refactoring (<a href="https://github.com/godotengine/godot/pull/78328">GH-78328</a>) earlier this year. This has been followed by two major performance optimizations, cutting down update times multiple times over — thanks to smart tile grouping using quadrants (<a href="https://github.com/godotengine/godot/pull/81070">GH-81070</a>) and a Y-sorting upgrade (<a href="https://github.com/godotengine/godot/pull/73813">GH-73813</a>), as well as other optimizations.</p>
 
-<p>Impressive as that is, it might just be overshadowed by the shear number of usability improvements to the creation and utilization of tilemaps contributed by <a href="https://github.com/KoBeWi">Tomasz Chabora</a>. Probably the most notable addition in this release is the new tool which allows you to flip and rotate any tile or tile pattern when placing them in the world (<a href="https://github.com/godotengine/godot/pull/80144">GH-80144</a>). And the list continues with improvements to scene tiles, polygon editing, various hints and tips that direct users, and so on and so forth (<a href="https://github.com/godotengine/godot/pull/77986">GH-77986</a>, <a href="https://github.com/godotengine/godot/pull/79285">GH-79285</a>, <a href="https://github.com/godotengine/godot/pull/79512">GH-79512</a>, <a href="https://github.com/godotengine/godot/pull/79676">GH-79676</a>, <a href="https://github.com/godotengine/godot/pull/79899">GH-79899</a>, <a href="https://github.com/godotengine/godot/pull/79904">GH-79904</a>, <a href="https://github.com/godotengine/godot/pull/80754">GH-80754</a>, …).</p>
+<p>Impressive as that is, it might just be overshadowed by the sheer number of usability improvements to the creation and utilization of tilemaps contributed by <a href="https://github.com/KoBeWi">Tomasz Chabora</a>. Probably the most notable addition in this release is the new tool which allows you to flip and rotate any tile or tile pattern when placing them in the world (<a href="https://github.com/godotengine/godot/pull/80144">GH-80144</a>). And the list continues with improvements to scene tiles, polygon editing, various hints and tips that direct users, and so on and so forth (<a href="https://github.com/godotengine/godot/pull/77986">GH-77986</a>, <a href="https://github.com/godotengine/godot/pull/79285">GH-79285</a>, <a href="https://github.com/godotengine/godot/pull/79512">GH-79512</a>, <a href="https://github.com/godotengine/godot/pull/79676">GH-79676</a>, <a href="https://github.com/godotengine/godot/pull/79899">GH-79899</a>, <a href="https://github.com/godotengine/godot/pull/79904">GH-79904</a>, <a href="https://github.com/godotengine/godot/pull/80754">GH-80754</a>, …).</p>
 
 <p>A dedicated shoutout to <a href="https://github.com/rakkarage">Rakka Rage</a> who has been fixing up the tilemap editor since Godot 4.1, and <a href="https://github.com/thiagola92">Thiago Lages de Alencar</a> who fixed their first bug in this release. They are among many more people making the engine better one contribution at a time (<a href="https://github.com/godotengine/godot/pull/77316">GH-77316</a>, <a href="https://github.com/godotengine/godot/pull/79678">GH-79678</a>, <a href="https://github.com/godotengine/godot/pull/80943">GH-80943</a>, <a href="https://github.com/godotengine/godot/pull/80968">GH-80968</a>).</p>
 
@@ -749,7 +760,7 @@
 </div>
 
 <link rel="stylesheet" href="/assets/css/anchor-link.css?1">
-<link rel="stylesheet" href="/assets/css/article-cards.css?1">
+<link rel="stylesheet" href="/assets/css/article-cards.css?2">
 <script src="/assets/js/anchor-link.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
@@ -778,7 +789,7 @@
 	<div class="container flex footer-container">
 		<div id="copyright">
 			<p>
-				© 2007-2023 Juan Linietsky, Ariel Manzur and <a
+				© 2007-2024 Juan Linietsky, Ariel Manzur and <a
 					href="https://github.com/godotengine/godot/blob/master/AUTHORS.md" target="_blank"
 					rel="noopener">contributors</a>.<br>
 				Hosted by the <a href="https://godot.foundation/" target="_blank" rel="noopener">Godot Foundation</a>.<br>
@@ -854,6 +865,13 @@
 		// in case a code block appears in an article.
 		document.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);
+		});
+
+		document.querySelectorAll('[data-post-date]').forEach((postDate) => {
+			// Highlight post dates that are less than 48 hours old.
+			if (Date.parse(postDate.dataset.postDate) > (Date.now() - 1000 * 60 * 60 * 48)) {
+				postDate.classList.add("post-recent-highlight");
+			};
 		});
 
 		// Initialize lightbox.

@@ -13,7 +13,7 @@
 
 	<meta property="og:title" content="Contact - Godot Engine">
 	<meta property="og:description" content="Contact information for Godot's development team.">
-	<meta property="og:image" content="https://godotengine.org/assets/share-image.jpg">
+	<meta property="og:image" content="https://godotengine.org/assets/share-image.webp">
 	<meta property="og:type" content="website">
 	<meta name="twitter:card" content="summary_large_image">
 	<title>Contact - Godot Engine</title>
@@ -21,7 +21,7 @@
 	<link rel="alternate" type="application/rss+xml" title="Godot News" href="/rss.xml">
 	<link rel="icon" href="/assets/favicon.png" sizes="any">
 	<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-	<link rel="stylesheet" href="/assets/css/main.css?109">
+	<link rel="stylesheet" href="/assets/css/main.css?111">
 	<link rel="stylesheet" href="/assets/css/tobii.min.css">
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-Bold.woff2" crossorigin>
 	<link rel="preload" as="font" href="/assets/fonts/Montserrat-ExtraBold.woff2" crossorigin>
@@ -45,9 +45,7 @@
 		<nav id="nav">
 			<ul class="left">
 				<li><a href="/features">Features</a></li>
-				<div class="only-on-mobile" style="width: 100%">
-					<li><a href="/showcase">Showcase</a></li>
-				</div>
+				<li class="only-on-mobile"><a href="/showcase">Showcase</a></li>
 				<li><a href="/blog">Blog</a></li>
 				<li><a href="/community">Community</a></li>
 				<li><a href="/contact">About</a></li>
@@ -130,17 +128,17 @@
 
 	<h3 class="title">Account removal (<abbr title="General Data Protection Regulation">GDPR</abbr>)</h3>
 	<p>
-		If you would like your Godot <a href="https://ask.godotengine.org/">Q&amp;A</a>
+		If you would like your Godot <a href="https://forum.godotengine.org/">Forum</a>
 		or <a href="https://godotengine.org/asset-library/">Asset Library</a> account
 		to be removed
 		along with all its associated data, follow the instructions in the
 		<a data-barba-prevent href="/privacy-policy#gdpr-request">privacy policy</a>.
 	</p>
 	<p>
-		Note that <a href="https://godotforums.org/">Godot Forums</a> accounts are
+		Note that <a href="https://godotforums.org/">Godot Community Forum</a> accounts are
 		managed by a third party. Therefore, account removal requests for the Godot Forums
 		must be directed to its administrators, not to us:
-		<a href="https://godotforums.org/p/1-contact">Godot Forums Contact</a>
+		<a href="https://godotforums.org/p/1-contact">Godot Community Forum Contact</a>
 	</p>
 
 	<h3 class="title">General inquiries</h3>
@@ -442,7 +440,7 @@
 	<div class="container flex footer-container">
 		<div id="copyright">
 			<p>
-				© 2007-2023 Juan Linietsky, Ariel Manzur and <a
+				© 2007-2024 Juan Linietsky, Ariel Manzur and <a
 					href="https://github.com/godotengine/godot/blob/master/AUTHORS.md" target="_blank"
 					rel="noopener">contributors</a>.<br>
 				Hosted by the <a href="https://godot.foundation/" target="_blank" rel="noopener">Godot Foundation</a>.<br>
@@ -518,6 +516,13 @@
 		// in case a code block appears in an article.
 		document.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);
+		});
+
+		document.querySelectorAll('[data-post-date]').forEach((postDate) => {
+			// Highlight post dates that are less than 48 hours old.
+			if (Date.parse(postDate.dataset.postDate) > (Date.now() - 1000 * 60 * 60 * 48)) {
+				postDate.classList.add("post-recent-highlight");
+			};
 		});
 
 		// Initialize lightbox.
